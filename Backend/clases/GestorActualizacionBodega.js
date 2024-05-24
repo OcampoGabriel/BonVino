@@ -1,24 +1,25 @@
-import { estaParaActualizar, getNombre } from "./Bodega.js";
+import { estaParaActualizar, getNombre, bodegas } from "./Bodega.js";
 
-function opcionActualizacionBodega() {
-    
+export function opcionActualizacionBodega() {
+    let fecha = getFechaActual()
+    let bodegasActualizables = buscarBodegasActualizables(fecha) // Cambiar el nombre de la variable
+    return bodegasActualizables;
 }
 
-function getFechaActual() {
+export function getFechaActual() {
     return new Date();
 }
 
-function buscarBodegasActualizables(fechaActual) {
+export function buscarBodegasActualizables(fechaActual) {
     let arrayNombre = [];
-    for (let i = 0; i < 10; i++) {
+    let cantBodegas = bodegas.length;
+    for (let i = 0; i < cantBodegas; i++) {
         let paraActualizar = estaParaActualizar(fechaActual, i);
         if (paraActualizar) {
             let nombre = getNombre(i);
             arrayNombre.push(nombre);
         }
+        console.log(i)
     }
-    console.log(arrayNombre);
+    return arrayNombre;
 }
-
-let fecha = getFechaActual();
-buscarBodegasActualizables(fecha);

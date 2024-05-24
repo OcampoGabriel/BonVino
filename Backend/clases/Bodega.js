@@ -10,7 +10,7 @@ class Bodega {
     }
 }
 
-const bodegas = [
+export const bodegas = [
     new Bodega(1, '-32.890183,-68.844050', 'Bodega Luna', 'Una bodega boutique situada en el corazón de Mendoza.', 'Fundada en 1920 por la familia Luna, ha sido reconocida por su dedicación a la producción de vinos de alta calidad.', 3, new Date(2024, 0, 1)),
     new Bodega(2, '-29.953764,-51.093750', 'Bodega Lopez', 'Ubicada en Rio Grande do Sul, es conocida por sus vinos espumosos.', 'La bodega fue establecida en 1898 por la familia Lopez, inmigrantes italianos con una pasión por el vino.', 4, new Date(2024, 1, 14)),
     new Bodega(3, '-33.047238,-71.612688', 'Finca La Selva', 'Una finca vinícola que se especializa en vinos tintos y blancos.', 'La Finca La Selva fue fundada en 1885 por la familia Selva, que emigró desde Italia.', 2, new Date(2024, 2, 10)),

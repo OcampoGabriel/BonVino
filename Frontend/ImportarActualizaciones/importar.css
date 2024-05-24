@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora+JP&display=swap');
+
+body {
+    background-color: #4b1b1b; /* Fondo oscuro */
+    color: #fafffd; /* Color de letra claro */
+    font-family: 'Lora', sans-serif;
+}
+
+h1 {
+    color: #fafffd; /* Color para detalles */
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #60302e; /* Borde con color de detalles */
+    background-color: #fafffd; /* Fondo claro para los campos de texto */
+    color: #60302e; /* Color de texto para los campos */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: #fafffd; /* Color claro para el borde al enfocar */
+}
+
+button {
+    background-color: #60302e; /* Fondo para botones */
+    color: #fafffd; /* Color de letra para botones */
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #fafffd; /* Color claro al pasar el mouse */
+    color: #60302e; /* Color de detalles al pasar el mouse */
+}
+
+/* Estilos para el contenedor de datos del vino */
+#datos-vino-container {
+    border: 1px solid #60302e; /* Borde con color de detalles */
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Estilos para separar visualmente los elementos */
+br {
+    clear: both;
+}
+
+label {
+    display: inline-block; /* Mostrar los labels en línea */
+    margin: 10px 20px 5px; /* Añadir margen derecho para separar los radios y labels */
+}
+
