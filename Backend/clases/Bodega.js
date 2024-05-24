@@ -22,11 +22,11 @@ const bodegas = [
     new Bodega(9, '-33.448890,-70.669265', 'Santiago', 'Una bodega alejada de la ciudad.', 'La bodega fue fundada en 1950 por la familia Santiago, que ha estado cultivando uvas en Chile durante más de medio siglo.', 5, new Date(2022, 6, 12)),
     new Bodega(10, '-24.782127,-65.423198', 'Salta', 'Una bodega conocida por sus vinos Torrontés.', 'Salta fue fundada en 1890 por la familia Salta, que ha estado haciendo vino en Argentina durante más de un siglo.', 6, new Date(2024, 4, 22))
 ];
+
 export function estaParaActualizar(fechaActual, bodega){
-    console.log(bodegas[bodega[6]]);
-    let diferencia = (fechaActual - bodegas[bodega[6]]); // Asumiendo 30 días por mes
-    console.log("Diferencia en meses:", diferencia);
-    if (diferencia >= bodegas[bodega[5]]){
+    let diferencia = (fechaActual - bodegas[bodega].fechaUltimaActualizacion); // Asumiendo 30 días por mes
+    let diferenciaMeses = diferencia / (1000 * 60 * 60 * 24 * 30)
+    if (diferenciaMeses >= bodegas[bodega].periodoActualizacion){
         return true
     }else{
         return false
@@ -34,7 +34,7 @@ export function estaParaActualizar(fechaActual, bodega){
 }
 
 export function getNombre(bodega){
-    return bodegas[bodega[2]]
+    return bodegas[bodega].nombre
 }
 
 
