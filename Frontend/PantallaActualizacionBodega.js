@@ -1,6 +1,14 @@
-const divBodegas = document.getElementById("bodegasActualizables");
+function seleccionarOpcionActualizacionBodega(){
+    habilitarVentana()
+}
+
+
+function habilitarVentana(){
+    window.location.href = "./importarActualizaciones/importar.html";
+}
 
 async function mostrarBodegasActualizables(){
+    const divBodegas = document.getElementById("bodegasActualizables");
     if(divBodegas){
         const res = await fetch(`http://localhost:8080/bodegasActualizables`);
         const datos = await res.json();
@@ -22,14 +30,8 @@ async function mostrarBodegasActualizables(){
     }
 }
 
-
-function seleccionarOpcionActualizacionBodega(){
-    habilitarVentana()
-}
-
-
-function habilitarVentana(){
-    window.location.href = "./importarActualizaciones/importar.html";
+function tomarSeleccionBodega(){
+    
 }
 
 

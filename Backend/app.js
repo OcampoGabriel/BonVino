@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import * as Gestor from "./clases/GestorActualizacionBodega.js"
+import * as Gestor from "./clases/GestorActualizacionBodega.js";
 
 const PORT = 8080;
 const app = express();
@@ -12,7 +12,16 @@ app.get("/bodegasActualizables", (request, response, next) =>{
     response.json(jsonBodegas);
 })
 
+app.get("/actualizacion/:bodega", async (request, response, next) => {
+        const bodegaActualizar = request.params.bodega;
+        const actualizacion = await Gestor.tomarSeleccionBodega(bodegaActualizar);
+        response.json(actualizacion);
+})
+
 // Puerto donde se escuchan las peticiones
-app.listen(PORT, console.log(`El servidor inicio correctamente en el puerto ${PORT}`))
+app.listen(PORT, () => {
+    console.log(`El servidor inicio correctamente en el puerto ${PORT}`);
+});
+
 
 

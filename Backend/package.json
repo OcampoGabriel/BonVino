@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type" :"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serverInit" : "node app.js"
+    "serverInit": "node app.js",
+    "bodegaInit" : "node ./simuladorSistemaBodega/appBodega.js"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +17,8 @@
     "express": "^4.19.2",
     "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nock": "^13.5.4"
   }
 }
