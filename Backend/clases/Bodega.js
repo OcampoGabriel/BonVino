@@ -1,3 +1,5 @@
+import * as Vino from "./Vino.js"
+
 class Bodega {
     constructor(coordenadas, nombre, descripcion, historia, periodoActualizacion, fechaUltimaActualizacion) {
         this.coordenadas = coordenadas;
@@ -36,5 +38,35 @@ export function getNombre(bodega){
     return bodegas[bodega].nombre
 }
 
+export function tenesEsteVino(bodega, vino){
+    let cantVinos = Vino.vinos.length;
+    let desicion = false; // Declarar la variable fuera del bucle
+
+    for (let i = 0; i < cantVinos; i++){
+        if (Vino.sosEsteVino(bodega, vino, i)) {
+            desicion = true; // Asignar un valor dentro del bucle
+            break; // Romper el bucle si se encuentra una coincidencia
+        }
+    }
+
+    if (desicion){
+        return "actualizar";
+    } else {
+        return "crear";
+    }
+}
+
+export function actualizarDatosVino(vino){
+    let cantVinos = Vino.vinos.length;
+    let fechaActual = new Date
+    for (let i = 0; i < cantVinos; i++){
+        if(Vino.esVinoPorActualizar(vino, i)){
+            Vino.setPrecio(vino, i)
+            Vino.setNotaDeCata(vino, i)
+            Vino.setEtiqueta(vino, i)
+            Vino.setFechaActualizacion(fechaActual, i)         
+        }
+    }    
+}
 
 

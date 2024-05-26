@@ -20,7 +20,7 @@ class Vino {
 export function obtenerActualizacionBodega(bodega){
     if(bodega === 'Bodega Luna'){
         return {
-            vinoActualizar: new Vino('El Gaucho', 2020, '../Etiquetas/ElGaucho.jpeg', 'Frutas rojas maduras y un toque de chocolate amargo.', 7500, 'Bodega Luna', ["Cabernet Ácido", "Pinot Dulce", "Sauvignon Fresco"]),
+            vinoActualizar: new Vino('El Gaucho', 2020, '../Etiquetas/ElGauchoNuevaImagen.jpeg', 'Frutas rojas maduras y un toque de chocolate amargo.', 7500, 'Bodega Luna', ["Cabernet Ácido", "Pinot Dulce", "Sauvignon Fresco"]),
             vinoNuevo: new Vino('Mansion Blanca', 2024, '../Etiquetas/MansionBlanca.jpeg', 'Aromas florales con un final de cacao.', 16000, 'Bodega Luna', ["Cabernet Ácido", "Sauvignon Fresco"])
         };
     }

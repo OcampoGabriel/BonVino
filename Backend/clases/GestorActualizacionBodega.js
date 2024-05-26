@@ -24,9 +24,20 @@ export function buscarBodegasActualizables(fechaActual) {
 }
 
 
-export function tomarSeleccionBodega(bodegaSelect){
-    return obtenerActualizacion(bodegaSelect)
+export async function tomarSeleccionBodega(bodegaSelect) {
+    let vinos = await obtenerActualizacion(bodegaSelect);
+    // Verificar si 'vinos' es un objeto
+    if (vinos && typeof vinos === 'object') {
+        for (let key in vinos) {
+            if (vinos.hasOwnProperty(key)) {
+                let queHacer = determinarVinosAActualizar(bodegaSelect, vinos[key]);
+                actualizarOCrearVino(bodegaSelect, vinos[key], queHacer)
+                
+            }
+        }
+    } 
 }
+
 
 export async function obtenerActualizacion(bodegaSelect){
     const url = `http://localhost:8081/actualizacion/${bodegaSelect}`;
@@ -38,3 +49,23 @@ export async function obtenerActualizacion(bodegaSelect){
             return response.json();
         })
 }
+
+export function determinarVinosAActualizar(bodega, vino){
+    return Bodega.tenesEsteVino(bodega, vino)
+}
+
+function actualizarOCrearVino(bodega, vino, trabajo){
+    if (trabajo === 'actualizar'){
+        actualizarCaracteristicasVinoEnBodega(vino)
+    }
+
+    if (trabajo === 'crear'){
+
+    }
+}
+
+function actualizarCaracteristicasVinoEnBodega(vino){
+    Bodega.actualizarDatosVino(vino)
+}
+
+tomarSeleccionBodega("Bodega Luna")
