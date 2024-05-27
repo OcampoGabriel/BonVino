@@ -1,4 +1,7 @@
 import * as Bodega from "./Bodega.js";
+import * as Maridaje from "./Maridaje.js";
+import * as Varietal from "./Varietal.js";
+import * as Vino from "./Vino.js"
 
 export function opcionActualizacionBodega() {
     let fecha = getFechaActual()
@@ -32,10 +35,12 @@ export async function tomarSeleccionBodega(bodegaSelect) {
             if (vinos.hasOwnProperty(key)) {
                 let queHacer = determinarVinosAActualizar(bodegaSelect, vinos[key]);
                 actualizarOCrearVino(bodegaSelect, vinos[key], queHacer)
-                
             }
         }
-    } 
+        let fechaActual = new Date
+        Bodega.setFechaUltimaActualizacion(fechaActual, bodegaSelect)
+    }
+    return vinos
 }
 
 
@@ -56,16 +61,32 @@ export function determinarVinosAActualizar(bodega, vino){
 
 function actualizarOCrearVino(bodega, vino, trabajo){
     if (trabajo === 'actualizar'){
-        actualizarCaracteristicasVinoEnBodega(vino)
+        actualizarCaracteristicasVinoEnBodega(vino, bodega)
     }
 
     if (trabajo === 'crear'){
-
+        if(buscarMaridaje(vino.maridaje)){
+            let varietalExiste = determinarExistenciaDeVarietal(vino.varietales)
+            crearVino(vino, varietalExiste)
+        }
     }
 }
 
-function actualizarCaracteristicasVinoEnBodega(vino){
-    Bodega.actualizarDatosVino(vino)
+function actualizarCaracteristicasVinoEnBodega(vino, bodega){
+    Bodega.actualizarDatosVino(vino, bodega)
 }
 
-tomarSeleccionBodega("Bodega Luna")
+function buscarMaridaje(maridaje){
+    return Maridaje.sosMaridaje(maridaje)
+}
+
+function determinarExistenciaDeVarietal(varietal){
+    let cantVarietales = varietal.length
+    for(let i = 0; i < cantVarietales; i++){
+        return Varietal.sosEsteVarietal(varietal, i)
+    }
+}
+
+function crearVino(vino, varietalExiste){
+    Vino.neW(vino, varietalExiste)
+}

@@ -39,7 +39,8 @@ export function getNombre(bodega){
 }
 
 export function tenesEsteVino(bodega, vino){
-    let cantVinos = Vino.vinos.length;
+    let vinosBodega = Vino.vinos.filter(vino => vino.bodega === bodega)
+    let cantVinos = vinosBodega.length;
     let desicion = false; // Declarar la variable fuera del bucle
 
     for (let i = 0; i < cantVinos; i++){
@@ -56,17 +57,28 @@ export function tenesEsteVino(bodega, vino){
     }
 }
 
-export function actualizarDatosVino(vino){
-    let cantVinos = Vino.vinos.length;
+export function actualizarDatosVino(vino, bodega){
     let fechaActual = new Date
+    let vinosBodega = Vino.vinos.filter(vino => vino.bodega === bodega)
+    let cantVinos = vinosBodega.length;
     for (let i = 0; i < cantVinos; i++){
         if(Vino.esVinoPorActualizar(vino, i)){
             Vino.setPrecio(vino, i)
             Vino.setNotaDeCata(vino, i)
             Vino.setEtiqueta(vino, i)
-            Vino.setFechaActualizacion(fechaActual, i)         
+            Vino.setFechaActualizacion(fechaActual, i)    
         }
     }    
+}
+
+
+export function setFechaUltimaActualizacion(fecha, bodega){
+    for(let b in bodegas){
+        if(bodegas[b].nombre === bodega){
+            bodegas[b].fechaUltimaActualizacion = fecha
+
+        }
+    }
 }
 
 

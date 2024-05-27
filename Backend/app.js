@@ -15,7 +15,8 @@ app.get("/bodegasActualizables", (request, response, next) =>{
 app.get("/actualizacion/:bodega", async (request, response, next) => {
         const bodegaActualizar = request.params.bodega;
         const actualizacion = await Gestor.tomarSeleccionBodega(bodegaActualizar);
-        response.json(actualizacion);
+        let actualizacionString = JSON.stringify(actualizacion)
+        response.json(actualizacionString);
 })
 
 // Puerto donde se escuchan las peticiones

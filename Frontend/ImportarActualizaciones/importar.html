@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-
     <a href="../inicio.html"><button><i class="bi bi-arrow-left"></i>  Regresar</button></a>
-    <h1>Gestión de Bodega</h1>
-    <h3>Bodegas con actualizaciones disponibles</h3>
-    <div id="bodegasActualizables">
-        <!--Aca van las bodegas-->
+    <div id="actualizable">
+        <h1>Gestión de Bodega</h1>
+        <h3>Bodegas con actualizaciones disponibles</h3>
+        <div id="bodegasActualizables">
+            <!--Aca van las bodegas-->
+        </div>
+        <button class="botonImportar" onclick="tomarSeleccionBodega()">Importar</button>
     </div>
-    <button class="botonImportar" onclick="tomarSeleccionBodega()">Importar</button>
+
+
     <script src="../PantallaActualizacionBodega.js"></script>
     <script>
         // Ejecutar la función mostrarBodegasActualizables cuando se cargue la página

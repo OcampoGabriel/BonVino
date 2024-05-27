@@ -6,7 +6,7 @@ class Varietal {
     }
 }
 
-const variedades = [
+const varietales = [
     new Varietal("Cabernet Ácido", 86, "Cabernet Sauvignon"),
     new Varietal("Pinot Dulce", 95, "Pinot Noir"),
     new Varietal("Merlot Afrutado", 83, "Merlot"),
@@ -32,5 +32,21 @@ const variedades = [
     new Varietal("Pinot Frutal", 95, "Pinot Noir"),
     new Varietal("Sauvignon Robusto", 86, "Sauvignon Blanc")
 ];
+
+
+export function sosEsteVarietal(varietal, i){
+    let cantVarietales = varietales.length
+    for(let j = 0; j < cantVarietales; j++){
+        if(varietal[i] === varietales[j].descripcion){
+            return true
+        }
+    }
+    return false
+}
+
+
+export function neW(varietal){
+    varietales.push(varietal)
+}
 
 
