@@ -23,6 +23,7 @@ export function buscarBodegasActualizables(fechaActual) {
             arrayNombre.push(nombre);
         }
     }
+
     return arrayNombre;
 }
 

@@ -75,3 +75,48 @@ label {
     margin: 10px 20px 5px; /* Añadir margen derecho para separar los radios y labels */
 }
 
+
+h3 {
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.bodega{
+    margin-bottom: 6rem;
+}
+
+.contenedor-vino {
+    display: column;
+    align-items: flex-start;
+    gap: 20px; 
+}
+
+.detalle-vino {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.imagen-vino {
+    object-fit: cover;
+    width: 400px; 
+    height: 400px; 
+}
+
+.titulo {
+    font-size: 0.5em; 
+    color: #a8a8a8;
+    margin-right: 5px; 
+    margin-bottom: 0;
+}
+
+.valor {
+    font-size: 0.8em; 
+    color: #ffffff;
+    font-weight: bold; 
+    margin-top: 0;
+}
+
