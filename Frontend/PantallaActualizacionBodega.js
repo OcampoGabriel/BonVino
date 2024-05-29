@@ -20,7 +20,7 @@ async function mostrarBodegasActualizables(){
 
         bodegasArray.forEach((bodega, index) => {
             contenido += `
-                <input type="radio" id="bodega${index}" name="bodega" value="${bodega}">
+                <input type="checkbox" id="bodega${index}" name="bodega" value="${bodega}">
                 <label for="bodega${index}">${bodega}</label><br>
             `;
         });
@@ -42,7 +42,8 @@ async function tomarSeleccionBodega(){
     const divActulizable = document.getElementById("actualizable");
     // Obtener todos los elementos de radio con nombre "bodega"
     const radios = document.querySelectorAll('input[name="bodega"]');
-    
+    let contenido = `<a href="./importar.html"><button><i class="bi bi-arrow-left"></i>  Listo</button></a>
+                    <h1> Resumen de Actualizacion </h1>`;
     // Recorrer todos los elementos de radio
     radios.forEach(async radio => {
         // Verificar si el radio está seleccionado
@@ -52,10 +53,6 @@ async function tomarSeleccionBodega(){
             
             const response = await fetch(`http://localhost:8080/actualizacion/${valorSeleccionado}`);
             const datos = await response.json();
-
-
-            let contenido = `<a href="./importar.html"><button><i class="bi bi-arrow-left"></i>  Listo</button></a>
-                             <h1> Resumen de Actualizacion </h1>`;
 
             for (let key in datos) {
                     // Verifica si el atributo es propio del objeto y no heredado
@@ -70,6 +67,8 @@ async function tomarSeleccionBodega(){
                                             <div class="info-vino">
                                                 <p class="titulo"> Añada </p>
                                                 <p class="valor">${datos[key].anada}</p>
+                                                <p class="titulo"> Bodega </p>
+                                                <p class="valor">${datos[key].bodega}</p>
                                                 <p class="titulo"> Nota de Cata </p> 
                                                 <p class="valor">${datos[key].notaDeCataBodega}</p>
                                                 <p class="titulo"> Precio (ARS) </p>
@@ -89,6 +88,8 @@ async function tomarSeleccionBodega(){
                                             <div class="info-vino">
                                                 <p class="titulo"> Añada </p>
                                                 <p class="valor">${datos[key].anada}</p>
+                                                <p class="titulo"> Bodega </p>
+                                                <p class="valor">${datos[key].bodega}</p>
                                                 <p class="titulo"> Nota de Cata </p> 
                                                 <p class="valor">${datos[key].notaDeCataBodega}</p>
                                                 <p class="titulo"> Precio (ARS) </p>
@@ -116,10 +117,6 @@ async function tomarSeleccionBodega(){
 
             contenido += ``;
             divActulizable.innerHTML = contenido;
-            
-            
-            // Detener el bucle forEach
-            return;
         }
     });
 }
