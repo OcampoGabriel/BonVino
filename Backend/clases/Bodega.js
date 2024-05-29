@@ -41,12 +41,12 @@ export function getNombre(bodega){
 export function tenesEsteVino(bodega, vino){
     let vinosBodega = Vino.vinos.filter(vino => vino.bodega === bodega)
     let cantVinos = vinosBodega.length;
-    let desicion = false; // Declarar la variable fuera del bucle
+    let desicion = false;
 
     for (let i = 0; i < cantVinos; i++){
         if (Vino.sosEsteVino(bodega, vino, i)) {
-            desicion = true; // Asignar un valor dentro del bucle
-            break; // Romper el bucle si se encuentra una coincidencia
+            desicion = true; 
+            break; 
         }
     }
 
@@ -61,7 +61,9 @@ export function actualizarDatosVino(vino, bodega){
     let fechaActual = new Date
     let vinosBodega = Vino.vinos.filter(vino => vino.bodega === bodega)
     let cantVinos = vinosBodega.length;
+    // La bodega recorre sus vinos hasta encontrar el vino que tiene que actualizar
     for (let i = 0; i < cantVinos; i++){
+        // Si se cumple esta condicion es porque encontro el vino y procedera a actualizarlo
         if(Vino.esVinoPorActualizar(vino, i)){
             Vino.setPrecio(vino, i)
             Vino.setNotaDeCata(vino, i)

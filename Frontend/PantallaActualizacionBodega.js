@@ -1,4 +1,6 @@
+// El usuario selecciono la opcion para actualizar bodegas
 function seleccionarOpcionActualizacionBodega(){
+    // Habilita una nueva ventana
     habilitarVentana()
 }
 
@@ -7,13 +9,14 @@ function habilitarVentana(){
     window.location.href = "./importarActualizaciones/importar.html";
 }
 
+// Accede al API que devuelve las bodegas con actualizacion disponible y las muestra
 async function mostrarBodegasActualizables(){
     const divBodegas = document.getElementById("bodegasActualizables");
     if(divBodegas){
         const res = await fetch(`http://localhost:8080/bodegasActualizables`);
         const datos = await res.json();
 
-        // Convertir la cadena JSON en un array de JavaScript
+        
         const bodegasArray = JSON.parse(datos);
 
         let contenido = `<form id="formularioBodegas">`;
@@ -25,7 +28,7 @@ async function mostrarBodegasActualizables(){
             `;
         });
 
-        // Verificar si contenido sigue siendo el mismo
+        
         if (contenido === '<form id="formularioBodegas">') {
             contenido = "<h4>No hay bodegas con actualizaciones disponibles en este momento</h4>";
         } else {
@@ -37,27 +40,20 @@ async function mostrarBodegasActualizables(){
 }
 
 
-// Función para manejar la selección de la bodega
+// Toma la bodega seleccionada por el usuario
 async function tomarSeleccionBodega(){
-    const divActulizable = document.getElementById("actualizable");
-    // Obtener todos los elementos de radio con nombre "bodega"
     const radios = document.querySelectorAll('input[name="bodega"]');
     let contenido = `<a href="./importar.html"><button><i class="bi bi-arrow-left"></i>  Listo</button></a>
                     <h1> Resumen de Actualizacion </h1>`;
-    // Recorrer todos los elementos de radio
     radios.forEach(async radio => {
-        // Verificar si el radio está seleccionado
         if(radio.checked){
-            // Obtener el valor del radio seleccionado
             const valorSeleccionado = radio.value;
-            
+            // Llama al gestor para que este actualice los datos de la bodega seleccionada
             const response = await fetch(`http://localhost:8080/actualizacion/${valorSeleccionado}`);
             const datos = await response.json();
 
             for (let key in datos) {
-                    // Verifica si el atributo es propio del objeto y no heredado
                     if (datos.hasOwnProperty(key)) {
-                        // Agrega el nombre del vino al contenido HTML
                         if(key[4] == 'A'){
                                 contenido += `
                                     <div class="contenedor-vino">
@@ -114,11 +110,13 @@ async function tomarSeleccionBodega(){
                         }
                     }
                 }
-
-            contenido += ``;
-            divActulizable.innerHTML = contenido;
+            mostrarResumenActualizacion(contenido)
         }
     });
 }
 
+function mostrarResumenActualizacion(contenido){
+    const divActulizable = document.getElementById("actualizable");
+    divActulizable.innerHTML = contenido
+}
 

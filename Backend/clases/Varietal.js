@@ -33,7 +33,7 @@ const varietales = [
     new Varietal("Sauvignon Robusto", 86, "Sauvignon Blanc")
 ];
 
-
+// Checkea que el varietal exista
 export function sosEsteVarietal(varietal, i){
     let cantVarietales = varietales.length
     for(let j = 0; j < cantVarietales; j++){
@@ -44,7 +44,7 @@ export function sosEsteVarietal(varietal, i){
     return false
 }
 
-
+// Crea un varietal
 export function neW(varietal){
     varietales.push(varietal)
 }

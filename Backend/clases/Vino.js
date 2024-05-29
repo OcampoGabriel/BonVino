@@ -66,6 +66,7 @@ export function setFechaActualizacion(fecha, i){
 // Tuve que poner la W con mayusculas porque "new" es palabra reservada
 export function neW(vino, varietalExiste){
     vinos.push(vino)
+    // Si el varietal no existe lo crea, delegandole la responsabilidad al varietal de crearse
     if(!varietalExiste)
         Varietal.neW(vino.varietales)
 }

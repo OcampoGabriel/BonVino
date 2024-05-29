@@ -57,13 +57,14 @@ export function obtenerActualizacionBodega(bodega){
     }
 }
 
+// Esto le devuelve al gestor la actualizacion correspondiente para la bodega
 app.get("/actualizacion/:bodega", async (request, response, next) => {
         const bodegaActualizar = request.params.bodega;
         const actualizacion = obtenerActualizacionBodega(bodegaActualizar);
         response.json(actualizacion);
 })
 
-// Puerto donde se escuchan las peticiones
+
 app.listen(PORT, () => {
     console.log(`El servidor inicio correctamente en el puerto ${PORT}`);
 });
