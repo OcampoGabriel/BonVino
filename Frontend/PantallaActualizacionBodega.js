@@ -93,7 +93,7 @@ async function tomarSeleccionBodega(){
                                                 <p class="valor">${datos[key].notaDeCataBodega}</p>
                                                 <p class="titulo"> Precio (ARS) </p>
                                                 <p class="valor">${datos[key].precioARS}</p>`;
-                                                if (typeof datos[key].varietales === 'object') {
+                                                if (typeof datos[key].varietales[0] === 'object') {
                                                     datos[key].varietales.forEach(varietal => {
                                                     // Accede a las propiedades del objeto 'varietal'
                                                     contenido += `
@@ -105,7 +105,7 @@ async function tomarSeleccionBodega(){
                                                 })
                                                 } else {
                                                     contenido += `<p class="titulo"> Descripción del Varietal </p> 
-                                                    <p class="valor">${varietal}</p>
+                                                    <p class="valor">${datos[key].varietales}</p>
                                                     </div>
                                                 </div>
                                             </div>`

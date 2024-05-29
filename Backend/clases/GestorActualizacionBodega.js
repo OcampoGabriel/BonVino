@@ -2,6 +2,8 @@ import * as Bodega from "./Bodega.js";
 import * as Maridaje from "./Maridaje.js";
 import * as Varietal from "./Varietal.js";
 import * as Vino from "./Vino.js"
+import * as Enofilo from "./Enofilo.js"
+import * as InterfazPush from "./InterfazNotificacionPush.js"
 
 export function opcionActualizacionBodega() {
     let fecha = getFechaActual()
@@ -91,3 +93,15 @@ function determinarExistenciaDeVarietal(varietal){
 function crearVino(vino, varietalExiste){
     Vino.neW(vino, varietalExiste)
 }
+
+export function buscarSeguidoresDeBodega(bodegaSelect){
+    let cantEnofilos = Enofilo.enofilos.length + 1
+    for(let idEno = 1; idEno < cantEnofilos; idEno++){
+        let username = Enofilo.seguisBodega(bodegaSelect, idEno)
+        if(username){
+            InterfazPush.notificarNovedadVinoParaBodega(username, bodegaSelect)
+        }
+    }
+}
+
+

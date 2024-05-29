@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    background-color: #4b1b1b;
+    color: #fafffd;
+    font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+    display: flex;
+    border-bottom: 2px solid #60302e;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    
+}
+
+
+h3 {
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.bodega{
+    margin-bottom: 6rem;
+}
+
+.contenedor-vino {
+    display: column;
+    align-items: flex-start;
+    gap: 20px; 
+}
+
+.detalle-vino {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.imagen-vino {
+    object-fit: cover;
+    width: 400px; 
+    height: 400px; 
+}
+
+.titulo {
+    font-size: 0.5em; 
+    color: #a8a8a8;
+    margin-right: 5px; 
+    margin-bottom: 0;
+}
+
+.valor {
+    font-size: 0.8em; 
+    color: #ffffff;
+    font-weight: bold; 
+    margin-top: 0;
+}
+
+.valorVarietal{
+    font-size: 0.8em; 
+    color: #ffffff;
+    font-weight: bold; 
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+
+
+button {
+    background-color: #60302e; /* Fondo para botones */
+    color: #fafffd; /* Color de letra para botones */
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #fafffd; /* Color claro al pasar el mouse */
+    color: #60302e; /* Color de detalles al pasar el mouse */
+}
+
+.contenedor-vino {
+  position: relative; /* Necesario para posicionar el pseudo-elemento correctamente */
+  padding-bottom: 1rem; /* Espaciado inferior para la línea */
+  margin-bottom: 2rem; /* Espaciado entre los contenedores */
+}
+
+.contenedor-vino::after {
+  content: ''; /* Creando el pseudo-elemento */
+  position: absolute; /* Posicionamiento absoluto dentro del contenedor */
+  left: 0; /* Iniciar desde la izquierda */
+  bottom: 0; /* Alinear al fondo del contenedor */
+  width: 100%; /* Ancho completo del contenedor */
+  height: 2px; /* Altura de la línea */
+  background: linear-gradient(to right, #60302e, rgba(96, 48, 46, 0)); /* Degradado lineal */
+}

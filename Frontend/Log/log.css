@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.body-log {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #4b1b1b; /* Color de fondo actualizado */
+}
+
+.container-log {
+  display: flex;
+  padding: 1%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #60302e; /* Color de borde actualizado */
+  border-radius: 1rem;
+  background-color: #4b1b1b; /* Manteniendo el color de fondo del contenedor */
+}
+
+.h3-log {
+  font-family: 'Roboto', sans-serif; /* Fuente actualizada */
+  color: #fafffd; /* Color del texto actualizado */
+  font-size: 2rem; /* Tamaño de fuente actualizado */
+  margin-bottom: 1rem; /* Margen inferior actualizado */
+}
+
+.input-log {
+  font-family: 'Roboto', sans-serif; /* Fuente actualizada */
+  font-size: 1.3rem; /* Tamaño de fuente actualizado */
+  width: 20vw;
+}
+
+.input-log::placeholder {
+  color: #a8a8a8; /* Color de placeholder actualizado */
+  margin-left: 10px; 
+  font-size: 1rem; /* Tamaño de fuente del placeholder actualizado */
+  opacity: 0.35; 
+}
+
+input[type="text"], input[type="password"] {
+  background-color: #f9f9f9; 
+  color: #31304D; 
+  border: 2px solid #161A30; 
+  border-radius: 0.5rem;
+}
+
+.button-log {
+  margin: 3%;
+  padding: 1%;
+  border-radius: 0.5rem;
+  background-color: #60302e; /* Fondo del botón actualizado */
+  border: none; /* Eliminando el borde del botón */
+  color: #fafffd; /* Color del texto del botón actualizado */
+  width: 10vw;
+  font-size: 1.3vw;
+  cursor: pointer; /* Añadiendo cursor pointer */
+  transition: background-color 0.3s ease; /* Añadiendo transición */
+}
+
+.button-log:hover {
+  background-color: #fafffd; /* Color de fondo al pasar el mouse */
+  color: #60302e; /* Color del texto al pasar el mouse */
+}
+
+.button-log:active {
+  background-color: #e4e4e4;
+  border: 1px solid black;
+}
+
+.button-log:focus {
+  outline: none; /* Eliminando el contorno */
+}
+
+/* Estilos adicionales para compatibilidad */
+h2 {
+  display: flex;
+  border-bottom: 2px solid #60302e; /* Color de borde actualizado */
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 20px;
+}
