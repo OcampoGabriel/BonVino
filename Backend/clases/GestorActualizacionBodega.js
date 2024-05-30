@@ -97,9 +97,14 @@ function actualizarCaracteristicasVinoEnBodega(vino, bodega){
     Bodega.actualizarDatosVino(vino, bodega)
 }
 
-function buscarMaridaje(maridaje){
+function buscarMaridaje(maridajes){
     // Le delega la responsabilidad al Maridaje de responder si es el solicitado
-    return Maridaje.sosMaridaje(maridaje)
+    for(let maridaje of maridajes){
+        if(!Maridaje.sosMaridaje(maridaje)){
+            return false
+        }
+    }
+    return true
 }
 
 function determinarExistenciaDeVarietal(varietal){
