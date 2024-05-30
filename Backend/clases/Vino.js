@@ -36,7 +36,8 @@ export let vinos = [
 
 
 export function sosEsteVino(bodega, vino, i){
-    if(bodega === vinos[i].bodega && vino.anada === vinos[i].anada && vino.nombre === vinos[i].nombre){
+    let vinosBodega = vinos.filter(vino => vino.bodega === bodega)
+    if(bodega === vinosBodega[i].bodega && vino.anada === vinosBodega[i].anada && vino.nombre === vinosBodega[i].nombre){
         return "actualizar"
     }
 }

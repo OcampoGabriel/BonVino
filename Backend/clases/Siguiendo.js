@@ -43,7 +43,7 @@ export const siguiendo = [
 ];
 
 export function sosDeBodega(bodega, enofilo, vuelta){
-    if(siguiendo[vuelta].siguiendoBodega === bodega && siguiendo[vuelta].enofilo === enofilo){
+    if(siguiendo[vuelta].siguiendoBodega === bodega && siguiendo[vuelta].enofilo === enofilo && siguiendo[vuelta].fechaFin === null){
         return true
     }
 }

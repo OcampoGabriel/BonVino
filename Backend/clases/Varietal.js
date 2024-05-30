@@ -48,5 +48,3 @@ export function sosEsteVarietal(varietal, i){
 export function neW(varietal){
     varietales.push(varietal)
 }
-
-
