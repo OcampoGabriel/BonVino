@@ -9,9 +9,9 @@ import * as InterfazPush from "./InterfazNotificacionPush.js"
 // Comienza con el proceso de buscar aquellas bodegas que tienen una actualizacion disponible
 export function opcionActualizacionBodega() {
     // Consigue la fecha actual para poder contrastar con la fecha de ultima actualizacion de las bodegas
-    let fecha = getFechaActual()
+    let fechaActual = getFechaActual()
     // Llama a la funcion que va a buscar las bodegas actualizables
-    let bodegasActualizables = buscarBodegasActualizables(fecha) 
+    let bodegasActualizables = buscarBodegasActualizables(fechaActual) 
     // Devuelve el array de bodegas con actualizacion disponible
     return bodegasActualizables;
 }
@@ -21,7 +21,7 @@ export function getFechaActual() {
 }
 
 export function buscarBodegasActualizables(fechaActual) {
-    let arrayBodegas = [];
+    let bodegasActualizables = [];
     let cantBodegas = Bodega.bodegas.length;
     for (let i = 0; i < cantBodegas; i++) {
         // Se va a comunicar con las Bodegas para que las mismas chequeen si estan para actualizar
@@ -29,27 +29,27 @@ export function buscarBodegasActualizables(fechaActual) {
         if (paraActualizar) {
             // Si estan para actualizar, les va a solicitar el nombre
             let nombre = Bodega.getNombre(i);
-            arrayBodegas.push(nombre);
+            bodegasActualizables.push(nombre);
         }
     }
     // Devuelve el array de bodegas con actualizacion disponible
-    return arrayBodegas;
+    return bodegasActualizables;
 }
 
 // El gestor toma la bodega que le mando la pantalla
 export async function tomarSeleccionBodega(bodegaSelect) {
     // El gestor se encarga de buscar la actualizacion para la bodega
-    let vinos = await obtenerActualizacion(bodegaSelect);
-    if (vinos && typeof vinos === 'object') {
+    let vinosAActualizar = await obtenerActualizacion(bodegaSelect);
+    if (vinosAActualizar && typeof vinosAActualizar === 'object') {
             // Esta funcion se encarga de separar aquellos vinos que hay que actualizar y aquellos que hay que crear
-            determinarVinosAActualizar(vinos, bodegaSelect);
+            determinarVinosAActualizar(vinosAActualizar, bodegaSelect);
         }
         let fechaActual = new Date
         // Una vez creados y actualizados los vinos, el gestor le delega la responsabilidad a bodega de actualizar su fecha de actualizacion.
         Bodega.setFechaUltimaActualizacion(fechaActual, bodegaSelect)
 
     // Devuelve los vinos que se actualizaron/crearon para que la pantalla los pueda procesar
-    return vinos
+    return vinosAActualizar
 }
 
 // El gestor se comunica con la API de la bodega seleccionada para obtener los datos de la actualizacion
