@@ -35,7 +35,6 @@ export class GestorActualizacionBodega{
 
     async tomarSeleccionBodega(bodegaSelect) {
         this.obtenerBodegaAActualizar(bodegaSelect)
-        console.log(this.bodegaSelect);
         this.vinosAActualizar = await this.obtenerActualizacion(this.bodegaSelect.nombre);
         this.determinarVinosAActualizar()
         return this.vinosAActualizar
@@ -136,9 +135,9 @@ export class GestorActualizacionBodega{
                 this.username = enofilo.getNombreUsuario()
                 let notificacion = new InterfazNotificacionPush(this.username)
                 notificacion.notificarNovedadVinoParaBodega(this.bodegaSelect.nombre)
-                this.finCU()
             }
         }
+        this.finCU()
     }
 
     finCU(){

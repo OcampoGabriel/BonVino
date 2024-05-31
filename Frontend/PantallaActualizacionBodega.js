@@ -45,13 +45,12 @@ async function tomarSeleccionBodega() {
     const radios = document.querySelectorAll('input[name="bodega"]');
     let contenido = `<a href="./importar.html"><button><i class="bi bi-arrow-left"></i>  Listo</button></a>
                     <h1> Resumen de Actualizacion </h1>`;
-    radios.forEach(async radio => {
+    for (const radio of radios) {
         if (radio.checked) {
             const valorSeleccionado = radio.value;
-            // Llama al gestor para que este actualice los datos de la bodega seleccionada
             const response = await fetch(`http://localhost:8080/actualizacion/${valorSeleccionado}`);
             const datos = await response.json();
-
+            
             for (let key in datos) {
                 if (datos.hasOwnProperty(key)) {
                     if (key[4] === 'A') {
@@ -122,11 +121,11 @@ async function tomarSeleccionBodega() {
                     }
                 }
             }
+
             mostrarResumenActualizacion(contenido);
         }
-    });
+    };
 }
-
 
 function mostrarResumenActualizacion(contenido){
     const divActulizable = document.getElementById("actualizable");
