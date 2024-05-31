@@ -1,134 +1,145 @@
-// El usuario selecciono la opcion para actualizar bodegas
-function seleccionarOpcionActualizacionBodega(){
-    // Habilita una nueva ventana
-    habilitarVentana()
-}
+class PantallaActualizacionBodega {
+    constructor() {
+        this.botonImportarActualizacionDeVinoDeBodega = null;
+        this.botonImportar = null;
+        this.bodegasActualizables = null;
+        this.divBodegas = null;
+        this.grillaBodegasActualizables = null;
+        this.actulizacion = null;
+        this.resumenActualizacion = null;
+    }
 
+    seleccionarOpcionActualizacionBodega() {
+        this.habilitarVentana();
+    }
 
-function habilitarVentana(){
-    window.location.href = "./importarActualizaciones/importar.html";
-}
+    habilitarVentana() {
+        window.location.href = "./importarActualizaciones/importar.html";
+    }
 
-// Accede al API que devuelve las bodegas con actualizacion disponible y las muestra
-async function mostrarBodegasActualizables(){
-    const divBodegas = document.getElementById("bodegasActualizables");
-    if(divBodegas){
-        const res = await fetch(`http://localhost:8080/bodegasActualizables`);
-        const datos = await res.json();
+    async mostrarBodegasActualizables() {
+        console.log("Ejecutando mostrarBodegasActualizables");
+        this.divBodegas = document.getElementById("bodegasActualizables");
+        if (this.divBodegas) {
+            try {
+                const res = await fetch(`http://localhost:8080/bodegasActualizables`);
+                const datos = await res.json();
 
-        
-        const bodegasArray = JSON.parse(datos);
+                this.bodegasActualizables = JSON.parse(datos);
+                this.grillaBodegasActualizables = `<form id="formularioBodegas">`;
 
-        let contenido = `<form id="formularioBodegas">`;
+                this.bodegasActualizables.forEach((bodega, index) => {
+                    this.grillaBodegasActualizables += `
+                        <input type="checkbox" id="bodega${index}" name="bodega" value="${bodega}">
+                        <label for="bodega${index}">${bodega}</label><br>
+                    `;
+                });
 
-        bodegasArray.forEach((bodega, index) => {
-            contenido += `
-                <input type="checkbox" id="bodega${index}" name="bodega" value="${bodega}">
-                <label for="bodega${index}">${bodega}</label><br>
-            `;
-        });
+                if (this.grillaBodegasActualizables === '<form id="formularioBodegas">') {
+                    this.grillaBodegasActualizables = "<h4>No hay bodegas con actualizaciones disponibles en este momento</h4>";
+                } else {
+                    this.grillaBodegasActualizables += `</form>`;
+                }
 
-        
-        if (contenido === '<form id="formularioBodegas">') {
-            contenido = "<h4>No hay bodegas con actualizaciones disponibles en este momento</h4>";
+                this.divBodegas.innerHTML = this.grillaBodegasActualizables;
+            } catch (error) {
+                console.error("Error al obtener las bodegas actualizables:", error);
+            }
         } else {
-            contenido += `</form>`;
+            console.error("El div bodegasActualizables no se encontró en el DOM");
         }
+    }
 
-        divBodegas.innerHTML = contenido;
+    async tomarSeleccionBodega() {
+        const radios = document.querySelectorAll('input[name="bodega"]');
+        this.resumenActulizacion = `<a href="./importar.html"><button><i class="bi bi-arrow-left"></i>  Listo</button></a>
+                        <h1> Resumen de Actualizacion </h1>`;
+        for (const radio of radios) {
+            if (radio.checked) {
+                const valorSeleccionado = radio.value;
+                const response = await fetch(`http://localhost:8080/actualizacion/${valorSeleccionado}`);
+                this.actualizacion = await response.json();
+                
+                for (let key in this.actualizacion) {
+                    if (this.actualizacion.hasOwnProperty(key)) {
+                        if (key[4] === 'A') {
+                            this.resumenActulizacion += `
+                                <div class="contenedor-vino">
+                                    <h3>Actualizado: ${this.actualizacion[key].nombre}</h3>
+                                    <div class="detalle-vino">
+                                        <img src="${this.actualizacion[key].imagenEtiqueta}" alt="Foto del vino ${this.actualizacion[key].nombre}" class="imagen-vino">
+                                        <div class="info-vino">
+                                            <p class="titulo"> Añada </p>
+                                            <p class="valor">${this.actualizacion[key].anada}</p>
+                                            <p class="titulo"> Bodega </p>
+                                            <p class="valor">${this.actualizacion[key].bodega}</p>
+                                            <p class="titulo"> Nota de Cata </p>
+                                            <p class="valor">${this.actualizacion[key].notaDeCataBodega}</p>
+                                            <p class="titulo"> Precio (ARS) </p>
+                                            <p class="valor">${this.actualizacion[key].precioARS}</p>`;
+                            if (this.actualizacion[key].maridaje) {
+                                this.resumenActulizacion += `<p class="titulo"> Maridajes Sugeridos </p>`;
+                                this.actualizacion[key].maridaje.forEach(maridaje => {
+                                    this.resumenActulizacion += `<p class="valorVarietal">   · ${maridaje}</p>`;
+                                });
+                            }
+                            if (this.actualizacion[key].varietales) {
+                                this.resumenActulizacion += `<p class="titulo"> Composicion del Varietal </p>`;
+                                this.actualizacion[key].varietales.forEach(varietal => {
+                                    this.resumenActulizacion += `<p class="valorVarietal">   · ${varietal}</p>`;
+                                });
+                            }
+                            this.resumenActulizacion += `
+                                        </div>
+                                    </div>
+                                </div>`;
+                        } else {
+                            this.resumenActulizacion += `
+                                <div class="contenedor-vino">
+                                    <h3>Nuevo: ${this.actualizacion[key].nombre}</h3>
+                                    <div class="detalle-vino">
+                                        <img src="${this.actualizacion[key].imagenEtiqueta}" alt="Foto del vino ${this.actualizacion[key].nombre}" class="imagen-vino">
+                                        <div class="info-vino">
+                                            <p class="titulo"> Añada </p>
+                                            <p class="valor">${this.actualizacion[key].anada}</p>
+                                            <p class="titulo"> Bodega </p>
+                                            <p class="valor">${this.actualizacion[key].bodega}</p>
+                                            <p class="titulo"> Nota de Cata </p>
+                                            <p class="valor">${this.actualizacion[key].notaDeCataBodega}</p>
+                                            <p class="titulo"> Precio (ARS) </p>
+                                            <p class="valor">${this.actualizacion[key].precioARS}</p>`;
+                            if (this.actualizacion[key].maridaje) {
+                                this.resumenActulizacion += `<p class="titulo"> Maridajes Sugeridos </p>`;
+                                this.actualizacion[key].maridaje.forEach(maridaje => {
+                                    this.resumenActulizacion += `<p class="valor">   · ${maridaje}</p>`;
+                                });
+                            }
+                            if (typeof this.actualizacion[key].varietales[0] === 'object') {
+                                this.actualizacion[key].varietales.forEach(varietal => {
+                                    this.resumenActulizacion += `
+                                        <p class="titulo"> Descripción del Varietal </p>
+                                        <p class="valorVarietal">   · ${varietal.descripcion}</p>`;
+                                });
+                            } else {
+                                this.resumenActulizacion += `<p class="titulo"> Descripción del Varietal </p>
+                                            <p class="valorVarietal">   · ${this.actualizacion[key].varietales}</p>`;
+                            }
+                            this.resumenActulizacion += `</div>
+                                    </div>
+                                </div>`;
+                        }
+                    }
+                }
+
+                this.mostrarResumenActualizacion(this.resumenActulizacion);
+            }
+        };
+    }
+
+    mostrarResumenActualizacion(contenido){
+        const divActulizable = document.getElementById("actualizable");
+        divActulizable.innerHTML = contenido
     }
 }
 
-
-// Toma la bodega seleccionada por el usuario
-async function tomarSeleccionBodega() {
-    const radios = document.querySelectorAll('input[name="bodega"]');
-    let contenido = `<a href="./importar.html"><button><i class="bi bi-arrow-left"></i>  Listo</button></a>
-                    <h1> Resumen de Actualizacion </h1>`;
-    for (const radio of radios) {
-        if (radio.checked) {
-            const valorSeleccionado = radio.value;
-            const response = await fetch(`http://localhost:8080/actualizacion/${valorSeleccionado}`);
-            const datos = await response.json();
-            
-            for (let key in datos) {
-                if (datos.hasOwnProperty(key)) {
-                    if (key[4] === 'A') {
-                        contenido += `
-                            <div class="contenedor-vino">
-                                <h3>Actualizado: ${datos[key].nombre}</h3>
-                                <div class="detalle-vino">
-                                    <img src="${datos[key].imagenEtiqueta}" alt="Foto del vino ${datos[key].nombre}" class="imagen-vino">
-                                    <div class="info-vino">
-                                        <p class="titulo"> Añada </p>
-                                        <p class="valor">${datos[key].anada}</p>
-                                        <p class="titulo"> Bodega </p>
-                                        <p class="valor">${datos[key].bodega}</p>
-                                        <p class="titulo"> Nota de Cata </p>
-                                        <p class="valor">${datos[key].notaDeCataBodega}</p>
-                                        <p class="titulo"> Precio (ARS) </p>
-                                        <p class="valor">${datos[key].precioARS}</p>`;
-                        if (datos[key].maridaje) {
-                            contenido += `<p class="titulo"> Maridajes Sugeridos </p>`;
-                            datos[key].maridaje.forEach(maridaje => {
-                                contenido += `<p class="valorVarietal">   · ${maridaje}</p>`;
-                            });
-                        }
-                        if (datos[key].varietales) {
-                            contenido += `<p class="titulo"> Composicion del Varietal </p>`;
-                            datos[key].varietales.forEach(varietal => {
-                                contenido += `<p class="valorVarietal">   · ${varietal}</p>`;
-                            });
-                        }
-                        contenido += `
-                                    </div>
-                                </div>
-                            </div>`;
-                    } else {
-                        contenido += `
-                            <div class="contenedor-vino">
-                                <h3>Nuevo: ${datos[key].nombre}</h3>
-                                <div class="detalle-vino">
-                                    <img src="${datos[key].imagenEtiqueta}" alt="Foto del vino ${datos[key].nombre}" class="imagen-vino">
-                                    <div class="info-vino">
-                                        <p class="titulo"> Añada </p>
-                                        <p class="valor">${datos[key].anada}</p>
-                                        <p class="titulo"> Bodega </p>
-                                        <p class="valor">${datos[key].bodega}</p>
-                                        <p class="titulo"> Nota de Cata </p>
-                                        <p class="valor">${datos[key].notaDeCataBodega}</p>
-                                        <p class="titulo"> Precio (ARS) </p>
-                                        <p class="valor">${datos[key].precioARS}</p>`;
-                        if (datos[key].maridaje) {
-                            contenido += `<p class="titulo"> Maridajes Sugeridos </p>`;
-                            datos[key].maridaje.forEach(maridaje => {
-                                contenido += `<p class="valor">   · ${maridaje}</p>`;
-                            });
-                        }
-                        if (typeof datos[key].varietales[0] === 'object') {
-                            datos[key].varietales.forEach(varietal => {
-                                contenido += `
-                                    <p class="titulo"> Descripción del Varietal </p>
-                                    <p class="valorVarietal">   · ${varietal.descripcion}</p>`;
-                            });
-                        } else {
-                            contenido += `<p class="titulo"> Descripción del Varietal </p>
-                                          <p class="valorVarietal">   · ${datos[key].varietales}</p>`;
-                        }
-                        contenido += `</div>
-                                </div>
-                            </div>`;
-                    }
-                }
-            }
-
-            mostrarResumenActualizacion(contenido);
-        }
-    };
-}
-
-function mostrarResumenActualizacion(contenido){
-    const divActulizable = document.getElementById("actualizable");
-    divActulizable.innerHTML = contenido
-}
 

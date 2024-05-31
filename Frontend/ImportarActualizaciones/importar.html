@@ -14,15 +14,20 @@
         <div id="bodegasActualizables">
             <!--Aca van las bodegas-->
         </div>
-        <button class="botonImportar" onclick="tomarSeleccionBodega()">Importar</button>
+        <button class="botonImportar" id="botonImportar">Importar</button>
     </div>
 
-
     <script src="../PantallaActualizacionBodega.js"></script>
+    
     <script>
-        // Ejecutar la función mostrarBodegasActualizables cuando se cargue la página
-        document.addEventListener("DOMContentLoaded", function() {
-            mostrarBodegasActualizables();
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM completamente cargado y analizado");
+            const pantalla = new PantallaActualizacionBodega();
+            pantalla.mostrarBodegasActualizables();
+            pantalla.botonImportar = document.getElementById("botonImportar");
+            pantalla.botonImportar.addEventListener("click", function() {
+                pantalla.tomarSeleccionBodega();
+            });
         });
     </script>
 </body>

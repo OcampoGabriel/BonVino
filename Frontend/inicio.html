@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<head>
+    <meta charset="UTF-8">
     <title>BonVino</title>
     <link rel="stylesheet" type="text/css" href="inicio.css">
 </head>
@@ -13,12 +12,23 @@
     </header>
     <main>
         <div class="button-div">
-            <button id="importar" onclick="seleccionarOpcionActualizacionBodega()">Importar actualización de vinos de bodega</button>
+            <button id="botonImportarActualizacionDeVinoDeBodega">Importar actualización de vinos de bodega</button>
             <a href="./consulta/consulta.html"><button id="consultar">Consultar Vinos</button></a>
             <a href="./Log/log.html"><button>Cerrar Sesión</button></a>
         </div>
     </main>
 
     <script src="./PantallaActualizacionBodega.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pantalla = new PantallaActualizacionBodega();
+            pantalla.botonImportarActualizacionDeVinoDeBodega = document.getElementById("botonImportarActualizacionDeVinoDeBodega");
+
+            pantalla.botonImportarActualizacionDeVinoDeBodega.addEventListener("click", function() {
+                pantalla.seleccionarOpcionActualizacionBodega();
+            });
+        });
+    </script>
 </body>
 </html>
