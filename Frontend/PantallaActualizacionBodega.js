@@ -110,7 +110,7 @@ class PantallaActualizacionBodega {
                             if (this.actualizacion[key].maridaje) {
                                 this.resumenActulizacion += `<p class="titulo"> Maridajes Sugeridos </p>`;
                                 this.actualizacion[key].maridaje.forEach(maridaje => {
-                                    this.resumenActulizacion += `<p class="valor">   · ${maridaje}</p>`;
+                                    this.resumenActulizacion += `<p class="valorVarietal">   · ${maridaje}</p>`;
                                 });
                             }
                             if (typeof this.actualizacion[key].varietales[0] === 'object') {
@@ -120,8 +120,12 @@ class PantallaActualizacionBodega {
                                         <p class="valorVarietal">   · ${varietal.descripcion}</p>`;
                                 });
                             } else {
-                                this.resumenActulizacion += `<p class="titulo"> Descripción del Varietal </p>
-                                            <p class="valorVarietal">   · ${this.actualizacion[key].varietales}</p>`;
+                                if (this.actualizacion[key].varietales) {
+                                this.resumenActulizacion += `<p class="titulo"> Composicion del Varietal </p>`;
+                                this.actualizacion[key].varietales.forEach(varietal => {
+                                    this.resumenActulizacion += `<p class="valorVarietal">   · ${varietal}</p>`;
+                                });
+                            }
                             }
                             this.resumenActulizacion += `</div>
                                     </div>

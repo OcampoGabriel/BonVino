@@ -16,7 +16,6 @@ export class Vino {
 
         // Se crear el varietal del vino si es que no existe
         if (this.varietales[0] && typeof this.varietales[0] === 'object') {
-            console.log(this.varietales[0]);
             // Utiliza el caso especifico del EXPERTO RESPECTO DE LA CREACION (creador y experto), ya que, no solo es el encargado de crearlo, si no que tiene todos los datos necesarios para llevar a cabo la creacion
             new Varietal(this.varietales[0].descripcion, this.varietales[0].composicion, this.varietales[0].uva)
 
