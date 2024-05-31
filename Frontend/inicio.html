@@ -22,9 +22,10 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Se crea una instancia de la clase PantallaActualizacionBodega
             const pantalla = new PantallaActualizacionBodega();
             pantalla.botonImportarActualizacionDeVinoDeBodega = document.getElementById("botonImportarActualizacionDeVinoDeBodega");
-
+            // Se preciono el boton ImportarActualizacionDeVinoDeBodega, lo que llama al metodo seleccionarOpcionActualizacionBodega()
             pantalla.botonImportarActualizacionDeVinoDeBodega.addEventListener("click", function() {
                 pantalla.seleccionarOpcionActualizacionBodega();
             });

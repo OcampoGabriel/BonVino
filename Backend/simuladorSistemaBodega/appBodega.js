@@ -67,10 +67,11 @@ class InterfazAPIBodega{
 
 const interfaz = new InterfazAPIBodega
 
-// Esto le devuelve al gestor la actualizacion correspondiente para la bodega
 app.get("/actualizacion/:bodega", async (request, response, next) => {
         const bodegaActualizar = request.params.bodega;
+        // Se llama a la InterfazAPIBodega con la bodega que le paso el gestor, para que esta le devuelve la actualizacion
         const actualizacion = interfaz.obtenerActualizacionBodega(bodegaActualizar);
+        // Esto le devuelve al gestor la actualizacion correspondiente para la bodega
         response.json(actualizacion);
 })
 

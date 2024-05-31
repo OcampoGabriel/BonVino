@@ -4,6 +4,7 @@ class Maridaje {
         this.descripcion = descripcion;
     }
 
+    // Metodo del maridaje para determinar si es el mismo que se paso por paramtro
     sosMaridaje(maridaje){
     if(maridaje === this.nombre){
         return true

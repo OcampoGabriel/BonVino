@@ -10,10 +10,12 @@ class PantallaActualizacionBodega {
     }
 
     seleccionarOpcionActualizacionBodega() {
+        // Llama al metodo habilitar ventana
         this.habilitarVentana();
     }
 
     habilitarVentana() {
+        // Habilita la ventana con las bodegas actualizables
         window.location.href = "./importarActualizaciones/importar.html";
     }
 
@@ -22,12 +24,8 @@ class PantallaActualizacionBodega {
         this.divBodegas = document.getElementById("bodegasActualizables");
         if (this.divBodegas) {
             try {
-                const res = await fetch(`http://localhost:8080/bodegasActualizables`);
-                const datos = await res.json();
-
-                this.bodegasActualizables = JSON.parse(datos);
                 this.grillaBodegasActualizables = `<form id="formularioBodegas">`;
-
+                // recorre las bodegas actualizables
                 this.bodegasActualizables.forEach((bodega, index) => {
                     this.grillaBodegasActualizables += `
                         <input type="checkbox" id="bodega${index}" name="bodega" value="${bodega}">
@@ -57,6 +55,7 @@ class PantallaActualizacionBodega {
         for (const radio of radios) {
             if (radio.checked) {
                 const valorSeleccionado = radio.value;
+                // La pantalla le pasa la bodega que se quiere actualizar al gestor
                 const response = await fetch(`http://localhost:8080/actualizacion/${valorSeleccionado}`);
                 this.actualizacion = await response.json();
                 

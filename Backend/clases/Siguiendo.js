@@ -7,6 +7,7 @@ class Siguiendo {
         this.fechaFin = fechaFin
     }
 
+    // Responde si el enofilo pasado por parametro es seguidor de la bodega pasada por parametro
     sosDeBodega(bodega, enofilo){
         if(this.enofilo === enofilo && this.siguiendoBodega === bodega && this.fechaFin === null){
             return true

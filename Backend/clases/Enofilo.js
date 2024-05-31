@@ -9,17 +9,24 @@ class Enofilo {
         this.imagenPefil = imagenPefil
     }
 
+    // Metodo con el cual el enofilo puede responder si sigue a una bodega en cuestion
     seguisBodega(bodega){
+        // por cada siguiendo existente
         for(let siguiendo of siguiendos){
+            // le delega la responsabilidad de responder si en ese siguiendo el enofilo sigue a la bodega
             if(siguiendo.sosDeBodega(bodega, this.id)){
                 return true
             }
         }
     }
 
+    // Metodo que le permite responder al enofilo con su nombre de usuario
     getNombreUsuario(){
+        // por cada usuario existente
         for(let usuario of usuarios){
+            // le delega la responsabilidad al usuario de responder si es del enofilo o no
             if(usuario.sosMiUser(this.id)){
+                // le delega la responsabilidad al usuario de pasarle su username (nombre del usuario del enofilo)
                 return usuario.getNombre()
             }
         }

@@ -10,6 +10,7 @@ class Bodega {
         this.fechaUltimaActualizacion = fechaUltimaActualizacion;
     }
 
+    // Metodo de la bodega para terminar si cumple con el periodo de actualizacion
     estaParaActualizar(fechaActual){
         let diferencia = (fechaActual - this.fechaUltimaActualizacion);
         let diferenciaMeses = diferencia / (1000 * 60 * 60 * 24 * 30)
@@ -20,13 +21,17 @@ class Bodega {
         }
     }
 
+    // Metodo de la bodega para devolver su nombre
     getNombre(){
         return this.nombre
     }
 
+    // Metodo de la boedga que recibe un vino como parametro y responde si lo tiene o no
     tenesEsteVino(vinoActualizacion){
         let vinosBodega = vinos.filter(vino => (vino.bodega === this.nombre))
+        // Por cada vino que tenga la bodega
         for (let vino of vinosBodega){
+            // Le delega la responsabilidad de responder si es el vino que hay que actualizar
             if(vino.sosEsteVino(vinoActualizacion)){
                 return true
             }
@@ -36,8 +41,11 @@ class Bodega {
 
     actualizarDatosVino(vinoActualizacion, fechaActual){
         let vinosBodega = vinos.filter(vino => (vino.bodega === this.nombre))
+        // Recorrer sus vinos
         for (let vino of vinosBodega){
+            // Si el vino es el que hay que actualizar
             if(vino.esVinoPorActualizar(vinoActualizacion)){
+                // Le delega la responsabilidad al vino de actualizar sus atributos (solo para los atributos que se permiten modificar)
                 vino.setPrecio(vinoActualizacion.precioARS)
                 vino.setNotaDeCata(vinoActualizacion.notaDeCataBodega)
                 vino.setEtiqueta(vinoActualizacion.imagenEtiqueta)
@@ -46,6 +54,7 @@ class Bodega {
         }
     }
 
+    // Metodo de la bodega para cambiar su fecha de actualizacion
     setFechaUltimaActualizacion(fecha){
         this.fechaUltimaActualizacion = fecha
     }

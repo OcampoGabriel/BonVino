@@ -11,13 +11,16 @@ app.use(cors());
 const gestor = new GestorActualizacionBodega
 
 app.get("/bodegasActualizables", (request, response, next) =>{
+    // Comienza el metodo opcionActualizacionBodega del gestor
     let bodegas = gestor.opcionActualizacionBodega()
     let jsonBodegas = JSON.stringify(bodegas);
+    // Se le devuelve a la pantalla los nombres de las bodegas actualizables
     response.json(jsonBodegas);
 })
 
 app.get("/actualizacion/:bodega", async (request, response, next) => {
         const bodegaActualizar = request.params.bodega;
+        // Se llama al metodo del gestor encargado de realizar la actualizacion pasandole la bodega a actualizar
         const actualizacion = await gestor.tomarSeleccionBodega(bodegaActualizar);
         response.json(actualizacion);
         gestor.buscarSeguidoresDeBodega(bodegaActualizar)

@@ -6,12 +6,14 @@ class Usuario {
         this.notificacionPendiente = notificacionPendiente
     }
 
+    // Metodo que le permite al usuario responder si su dueño es un enofilo pasado por parametro
     sosMiUser(idEno){
         if(this.enofiloAsociado === idEno){
             return true
         }
     }
 
+    // Metodo con el cual el usuario es capaz de responder con su username
     getNombre(){
         return this.username
     }

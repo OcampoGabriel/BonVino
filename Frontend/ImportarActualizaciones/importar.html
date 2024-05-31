@@ -20,11 +20,28 @@
     <script src="../PantallaActualizacionBodega.js"></script>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("DOM completamente cargado y analizado");
-            const pantalla = new PantallaActualizacionBodega();
-            pantalla.mostrarBodegasActualizables();
+        // Cuando se habilita la ventana se ejecuta lo siguiente
+            document.addEventListener('DOMContentLoaded', async function() {
+                const pantalla = new PantallaActualizacionBodega();
+                
+                // Se le pasa el trabajo al gestor para que este devuelva las bodegas con actualizacion disponible
+                async function llamarGestor() {
+                    const res = await fetch(`http://localhost:8080/bodegasActualizables`);
+                    const datos = await res.json();
+                    return JSON.parse(datos); 
+                }
+
+                try {
+                    // Guarda las bodegas actualizables que le paso el gestor
+                    pantalla.bodegasActualizables = await llamarGestor();
+                    // Se llama al metodo para mostrar las bodegas actualizables
+                    pantalla.mostrarBodegasActualizables();
+                } catch (error) {
+                    console.error("Error al llamar al gestor:", error);
+                }
+            
             pantalla.botonImportar = document.getElementById("botonImportar");
+            // Cuando se presiona el boton importar, se llama al metodo de pantalla para tomar la seleccion de la bodega y pasarsela al gestor
             pantalla.botonImportar.addEventListener("click", function() {
                 pantalla.tomarSeleccionBodega();
             });
