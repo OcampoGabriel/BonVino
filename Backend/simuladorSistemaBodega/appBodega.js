@@ -27,7 +27,13 @@ class Varietal {
     }
 }
 
-export function obtenerActualizacionBodega(bodega){
+class InterfazAPIBodega{
+    constructor(url, actualizaciones){
+        this.url = url
+        this.actualizaciones = actualizaciones
+    }
+
+    obtenerActualizacionBodega(bodega){
     if(bodega === 'Bodega Luna'){
         return {
             vinoActualizar: new Vino('El Gaucho', 2020, '../Etiquetas/ElGauchoNuevaImagen.jpeg', 'Frutas rojas maduras y un toque de chocolate amargo', 7500, new Date(2024, 1, 23), ['Salmón rosado', 'Pescado blanco'], 'Bodega Luna', ["Cabernet Ácido", "Pinot Dulce", "Sauvignon Fresco"]),
@@ -56,11 +62,15 @@ export function obtenerActualizacionBodega(bodega){
         };
     }
 }
+}
+
+
+const interfaz = new InterfazAPIBodega
 
 // Esto le devuelve al gestor la actualizacion correspondiente para la bodega
 app.get("/actualizacion/:bodega", async (request, response, next) => {
         const bodegaActualizar = request.params.bodega;
-        const actualizacion = obtenerActualizacionBodega(bodegaActualizar);
+        const actualizacion = interfaz.obtenerActualizacionBodega(bodegaActualizar);
         response.json(actualizacion);
 })
 

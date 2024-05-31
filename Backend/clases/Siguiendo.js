@@ -6,10 +6,18 @@ class Siguiendo {
         this.fechaInicio = fechaInicio,
         this.fechaFin = fechaFin
     }
+
+    sosDeBodega(bodega, enofilo){
+        if(this.enofilo === enofilo && this.siguiendoBodega === bodega && this.fechaFin === null){
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 
-export const siguiendo = [
+export const siguiendos = [
     new Siguiendo(1, 2, null, '2023-01-15', null),
     new Siguiendo(1, null, 'Valle Central', '2023-02-10', null),
     new Siguiendo(2, 3, null, '2023-01-20', null),
@@ -42,9 +50,4 @@ export const siguiendo = [
     new Siguiendo(6, null, 'Costa Verde', '2023-03-25', '2023-04-25')
 ];
 
-export function sosDeBodega(bodega, enofilo, vuelta){
-    if(siguiendo[vuelta].siguiendoBodega === bodega && siguiendo[vuelta].enofilo === enofilo && siguiendo[vuelta].fechaFin === null){
-        return true
-    }
-}
 

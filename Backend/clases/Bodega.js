@@ -1,4 +1,4 @@
-import * as Vino from "./Vino.js"
+import {vinos} from "./Vino.js"
 
 class Bodega {
     constructor(coordenadas, nombre, descripcion, historia, periodoActualizacion, fechaUltimaActualizacion) {
@@ -8,6 +8,46 @@ class Bodega {
         this.historia = historia;
         this.periodoActualizacion = periodoActualizacion;
         this.fechaUltimaActualizacion = fechaUltimaActualizacion;
+    }
+
+    estaParaActualizar(fechaActual){
+        let diferencia = (fechaActual - this.fechaUltimaActualizacion);
+        let diferenciaMeses = diferencia / (1000 * 60 * 60 * 24 * 30)
+        if (diferenciaMeses >= this.periodoActualizacion){
+            return true
+        }else{
+            return false
+        }
+    }
+
+    getNombre(){
+        return this.nombre
+    }
+
+    tenesEsteVino(vinoActualizacion){
+        let vinosBodega = vinos.filter(vino => (vino.bodega === this.nombre))
+        for (let vino of vinosBodega){
+            if(vino.sosEsteVino(vinoActualizacion)){
+                return true
+            }
+        }
+        return false
+    }
+
+    actualizarDatosVino(vinoActualizacion, fechaActual){
+        let vinosBodega = vinos.filter(vino => (vino.bodega === this.nombre))
+        for (let vino of vinosBodega){
+            if(vino.esVinoPorActualizar(vinoActualizacion)){
+                vino.setPrecio(vinoActualizacion.precioARS)
+                vino.setNotaDeCata(vinoActualizacion.notaDeCataBodega)
+                vino.setEtiqueta(vinoActualizacion.imagenEtiqueta)
+                vino.setFechaActualizacion(fechaActual)
+            }
+        }
+    }
+
+    setFechaUltimaActualizacion(fecha){
+        this.fechaUltimaActualizacion = fecha
     }
 }
 
@@ -23,62 +63,4 @@ export let bodegas = [
     new Bodega('-33.448890,-70.669265', 'Santiago', 'Una bodega alejada de la ciudad.', 'La bodega fue fundada en 1950 por la familia Santiago, que ha estado cultivando uvas en Chile durante más de medio siglo.', 5, new Date(2022, 6, 12)),
     new Bodega('-24.782127,-65.423198', 'Salta', 'Una bodega conocida por sus vinos Torrontés.', 'Salta fue fundada en 1890 por la familia Salta, que ha estado haciendo vino en Argentina durante más de un siglo.', 6, new Date(2024, 4, 22))
 ];
-
-export function estaParaActualizar(fechaActual, bodega){
-    let diferencia = (fechaActual - bodegas[bodega].fechaUltimaActualizacion); // Asumiendo 30 días por mes
-    let diferenciaMeses = diferencia / (1000 * 60 * 60 * 24 * 30)
-    if (diferenciaMeses >= bodegas[bodega].periodoActualizacion){
-        return true
-    }else{
-        return false
-    }
-}
-
-export function getNombre(bodega){
-    return bodegas[bodega].nombre
-}
-
-export function tenesEsteVino(bodega, vino){
-    let vinosBodega = Vino.vinos.filter(vino => vino.bodega === bodega)
-    let cantVinos = vinosBodega.length;
-    let desicion = false;
-
-    for (let i = 0; i < cantVinos; i++){
-        if (Vino.sosEsteVino(bodega, vino, i)) {
-            desicion = true; 
-            break; 
-        }
-    }
-
-    if (desicion){
-        return "actualizar";
-    } else {
-        return "crear";
-    }
-}
-
-export function actualizarDatosVino(vino, bodega){
-    let fechaActual = new Date
-    let cantVinos = Vino.vinos.length;
-    // La bodega recorre sus vinos hasta encontrar el vino que tiene que actualizar
-    for (let i = 0; i < cantVinos; i++){
-        // Si se cumple esta condicion es porque encontro el vino y procedera a actualizarlo
-        if(Vino.esVinoPorActualizar(vino, i)){
-            Vino.setPrecio(vino, i)
-            Vino.setNotaDeCata(vino, i)
-            Vino.setEtiqueta(vino, i)
-            Vino.setFechaActualizacion(fechaActual, i)    
-        }
-    }    
-}
-
-
-export function setFechaUltimaActualizacion(fecha, bodega){
-    for(let b in bodegas){
-        if(bodegas[b].nombre === bodega){
-            bodegas[b].fechaUltimaActualizacion = fecha
-
-        }
-    }
-}
 

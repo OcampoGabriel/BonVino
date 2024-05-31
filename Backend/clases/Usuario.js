@@ -5,6 +5,16 @@ class Usuario {
         this.enofiloAsociado = enofiloAsociado;
         this.notificacionPendiente = notificacionPendiente
     }
+
+    sosMiUser(idEno){
+        if(this.enofiloAsociado === idEno){
+            return true
+        }
+    }
+
+    getNombre(){
+        return this.username
+    }
 }
 
 export const usuarios = [
@@ -17,8 +27,3 @@ export const usuarios = [
     new Usuario("piquetin", "bochomaximo", 7, [])
 ];
 
-
-export function getNombre(enofilo){
-    enofilo--
-    return usuarios[enofilo].username
-}

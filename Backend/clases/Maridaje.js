@@ -3,10 +3,16 @@ class Maridaje {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
+
+    sosMaridaje(maridaje){
+    if(maridaje === this.nombre){
+        return true
+    }
+}
 }
 
 
-const maridajes = [
+export const maridajes = [
     new Maridaje('Tira de asado', 'Un corte de carne de res típico de Argentina, ideal para asar a la parrilla.'),
     new Maridaje('Salmón rosado', 'Un pescado de sabor suave y textura firme, ideal para asar o cocinar al vapor.'),
     new Maridaje('Postre muy dulce', 'Un postre con alto contenido de azúcar, como un pastel de chocolate o un flan.'),
@@ -18,12 +24,3 @@ const maridajes = [
     new Maridaje('Lenguado a la plancha', 'Un pescado de sabor suave y textura delicada, cocinado a la plancha.'),
     new Maridaje('Solomillo de cerdo', 'Un corte de carne de cerdo de sabor suave y textura firme, ideal para asar o cocinar al horno.')
 ];
-
-export function sosMaridaje(maridaje){
-    let cantMaridajes = maridajes.length
-    for (let i = 0; i < cantMaridajes; i++){
-        if(maridaje === maridajes[i].nombre){
-            return true
-        }
-    }
-}

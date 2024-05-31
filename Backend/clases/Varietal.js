@@ -1,12 +1,22 @@
-class Varietal {
+export class Varietal {
     constructor(descripcion, composicion, uva) {
         this.descripcion = descripcion;
         this.composicion = composicion;
         this.uva = uva;
     }
+
+    sosEsteVarietal(varietal){
+        if(varietal === this.descripcion){
+            return true
+        }
+    }
+
+    new(){
+        varietales.push(this)
+    }
 }
 
-const varietales = [
+export const varietales = [
     new Varietal("Cabernet Ácido", 86, "Cabernet Sauvignon"),
     new Varietal("Pinot Dulce", 95, "Pinot Noir"),
     new Varietal("Merlot Afrutado", 83, "Merlot"),
@@ -32,19 +42,3 @@ const varietales = [
     new Varietal("Pinot Frutal", 95, "Pinot Noir"),
     new Varietal("Sauvignon Robusto", 86, "Sauvignon Blanc")
 ];
-
-// Checkea que el varietal exista
-export function sosEsteVarietal(varietal, i){
-    let cantVarietales = varietales.length
-    for(let j = 0; j < cantVarietales; j++){
-        if(varietal[i] === varietales[j].descripcion){
-            return true
-        }
-    }
-    return false
-}
-
-// Crea un varietal
-export function neW(varietal){
-    varietales.push(varietal)
-}

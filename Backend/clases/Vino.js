@@ -1,6 +1,6 @@
-import * as Varietal from "./Varietal.js"
+import {Varietal} from "./Varietal.js"
 
-class Vino {
+export class Vino {
     constructor(nombre, anada, imagenEtiqueta, notaDeCataBodega, precioARS, fehaActualizacion, maridaje = [], bodega, varietales = []) {
         this.nombre = nombre;
         this.anada = anada;
@@ -11,6 +11,46 @@ class Vino {
         this.maridaje = maridaje;
         this.bodega = bodega;
         this.varietales = varietales;
+    }
+
+    sosEsteVino(vino){
+        if(this.nombre === vino.nombre && this.anada === vino.anada){
+                return true
+            } else{
+                return false
+            }
+        }
+
+    esVinoPorActualizar(vino){
+        if(this.nombre === vino.nombre && this.anada === vino.anada){
+                return true
+            } else{
+                return false
+            }
+    }
+
+    setPrecio(nuevoPrecio){
+        this.precioARS = nuevoPrecio
+    }
+
+    setNotaDeCata(nuevaNota){
+        this.notaDeCataBodega = nuevaNota
+    }
+
+    setEtiqueta(nuevaEtiqueta){
+        this.imagenEtiqueta = nuevaEtiqueta
+    }
+
+    setFechaActualizacion(nuevaFecha){
+        this.fehaActualizacion = nuevaFecha
+    }
+
+    new(crearVarietal){
+        vinos.push(this)
+        if(crearVarietal){
+            let nuevoVarietal = new Varietal(this.varietales[0].descripcion, this.varietales[0].composicion, this.varietales[0].uva)
+            nuevoVarietal.new()
+        }
     }
 }
 
@@ -36,39 +76,3 @@ export let vinos = [
 
 
 
-export function sosEsteVino(bodega, vino, i){
-    let vinosBodega = vinos.filter(vino => vino.bodega === bodega)
-    if(bodega === vinosBodega[i].bodega && vino.anada === vinosBodega[i].anada && vino.nombre === vinosBodega[i].nombre){
-        return "actualizar"
-    }
-}
-
-export function esVinoPorActualizar(vino, i){
-    if (vino.nombre === vinos[i].nombre && vino.anada === vinos[i].anada){
-        return true
-    }
-}
-
-export function setPrecio(vino, i){
-    vinos[i].precioARS = vino.precioARS
-}
-
-export function setNotaDeCata(vino, i){
-    vinos[i].notaDeCataBodega = vino.notaDeCataBodega
-}
-
-export function setEtiqueta(vino, i){
-    vinos[i].imagenEtiqueta = vino.imagenEtiqueta
-}
-
-export function setFechaActualizacion(fecha, i){
-    vinos[i].fehaActualizacion = fecha
-}
-
-// Tuve que poner la W con mayusculas porque "new" es palabra reservada
-export function neW(vino, varietalExiste){
-    vinos.push(vino)
-    // Si el varietal no existe lo crea, delegandole la responsabilidad al varietal de crearse
-    if(!varietalExiste)
-        Varietal.neW(vino.varietales)
-}

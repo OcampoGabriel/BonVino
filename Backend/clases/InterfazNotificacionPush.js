@@ -1,11 +1,15 @@
-import * as Usuario from "./Usuario.js"
+import {usuarios} from "./Usuario.js"
 
-export function notificarNovedadVinoParaBodega(username, bodega){
-    let cantUsuario = Usuario.usuarios.length
-    for(let i = 0; i < cantUsuario; i++){
-        if(Usuario.usuarios[i].username === username){
-            Usuario.usuarios[i].notificacionPendiente.push(bodega)
+export class InterfazNotificacionPush{
+    constructor(usuarioAsociado){
+        this.usuarioAsociado = usuarioAsociado
+    }
 
+    notificarNovedadVinoParaBodega(bodega){
+        for(let usuario of usuarios){
+            if(usuario.username === this.usuarioAsociado){
+                usuario.notificacionPendiente.push(bodega)
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
-import * as Siguiendo from "./Siguiendo.js"
-import * as Usuario from "./Usuario.js"
+import {siguiendos} from "./Siguiendo.js"
+import {usuarios} from "./Usuario.js"
 
 class Enofilo {
     constructor(id, nombre, apellido, imagenPefil) {
@@ -7,6 +7,22 @@ class Enofilo {
         this.nombre = nombre;
         this.apellido = apellido;
         this.imagenPefil = imagenPefil
+    }
+
+    seguisBodega(bodega){
+        for(let siguiendo of siguiendos){
+            if(siguiendo.sosDeBodega(bodega, this.id)){
+                return true
+            }
+        }
+    }
+
+    getNombreUsuario(){
+        for(let usuario of usuarios){
+            if(usuario.sosMiUser(this.id)){
+                return usuario.getNombre()
+            }
+        }
     }
 }
 
@@ -20,12 +36,3 @@ export const enofilos = [
     new Enofilo(7, 'Miguel', 'Rodríguez', ''),
 ];
 
-export function seguisBodega(bodega, enofilo){
-    let cantSiguiendo = Siguiendo.siguiendo.length
-    for (let i = 0; i < cantSiguiendo; i++){
-        if(Siguiendo.sosDeBodega(bodega, enofilo, i)){
-            return Usuario.getNombre(enofilo)
-        }
-    }
-
-}
